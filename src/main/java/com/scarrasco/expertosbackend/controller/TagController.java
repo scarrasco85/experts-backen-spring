@@ -16,7 +16,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://probando-expert-frontend-produccion2.vercel.app", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
+@CrossOrigin(origins = "https://proyecto-experts-angular.vercel.app", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class TagController {
 
     private final TagService tagService;
@@ -65,7 +65,7 @@ public class TagController {
 
         Optional<Tag> tagOpt = tagService.findOne(id);
 
-        if(tagOpt.isPresent())
+        if(!tagOpt.isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         if (tagOpt.get().getId() == -500L)
@@ -160,7 +160,7 @@ public class TagController {
             if (Objects.equals(result, Optional.of(false)))
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-            if (result.isPresent())
+            if (!result.isPresent())
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
             return ResponseEntity.noContent().build();

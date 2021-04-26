@@ -124,7 +124,7 @@ public class ExpertServiceImpl implements ExpertService {
 
             Optional<Expert> beforeExpert = repository.findById(id);
 
-            if (beforeExpert.isPresent()){
+            if (!beforeExpert.isPresent()){
                 return new Expert().setId(-404L);
             }
 

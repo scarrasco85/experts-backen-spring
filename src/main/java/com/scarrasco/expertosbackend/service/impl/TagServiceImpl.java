@@ -112,7 +112,7 @@ public class TagServiceImpl implements TagService {
 
             Optional<Tag> beforeTag = repository.findById(id);
 
-            if (beforeTag.isPresent()){
+            if (!beforeTag.isPresent()){
                 return new Tag().setId(-404L);
             }
 

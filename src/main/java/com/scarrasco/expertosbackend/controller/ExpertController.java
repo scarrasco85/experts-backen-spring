@@ -16,7 +16,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://probando-expert-frontend-produccion2.vercel.app", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
+@CrossOrigin(origins = "https://proyecto-experts-angular.vercel.app", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class ExpertController {
 
     private final ExpertService expertService;
@@ -72,7 +72,7 @@ public class ExpertController {
 
         Optional<Expert> expertOpt = expertService.findOne(id);
 
-        if(expertOpt.isPresent())
+        if(!expertOpt.isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         if (expertOpt.get().getId() == -500L)
@@ -169,7 +169,7 @@ public class ExpertController {
         if (Objects.equals(result, Optional.of(false)))
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-        if (result.isPresent())
+        if (!result.isPresent())
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
         return ResponseEntity.noContent().build();
