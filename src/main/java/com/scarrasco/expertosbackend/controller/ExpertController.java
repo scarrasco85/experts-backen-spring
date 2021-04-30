@@ -17,7 +17,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/api")
 // Permitir en producción
-@CrossOrigin(origins = "https://proyecto-experts-angular.vercel.app", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
+@CrossOrigin(origins = "https://proyecto-experts.vercel.app", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 //Permitir en local
 //@CrossOrigin(origins = "http://localhost:4200", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class ExpertController {
