@@ -16,7 +16,10 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api")
+// Permitir en producción
 @CrossOrigin(origins = "https://proyecto-experts-angular.vercel.app", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
+//Permitir en local
+//@CrossOrigin(origins = "http://localhost:4200", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class ExpertController {
 
     private final ExpertService expertService;
@@ -53,7 +56,7 @@ public class ExpertController {
         List<Expert> expertsDB = expertService.findAll(map1);
 
         if (expertsDB.isEmpty())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         if (expertsDB.get(0).getId()== -500L)
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,7 +76,7 @@ public class ExpertController {
         Optional<Expert> expertOpt = expertService.findOne(id);
 
         if(!expertOpt.isPresent())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         if (expertOpt.get().getId() == -500L)
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -144,7 +147,7 @@ public class ExpertController {
         Expert expertUpdated = expertService.updateExpert(id, expert);
 
         if (expertUpdated.getId() == -404L)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         if (expertUpdated.getId() == -500L)
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -167,7 +170,7 @@ public class ExpertController {
         Optional<Boolean> result = expertService.deleteOne(id);
 
         if (Objects.equals(result, Optional.of(false)))
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         if (!result.isPresent())
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

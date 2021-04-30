@@ -16,7 +16,10 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api")
+// Permitir en producción
 @CrossOrigin(origins = "https://proyecto-experts-angular.vercel.app", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
+//Permitir en local
+//@CrossOrigin(origins = "http://localhost:4200", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class TagController {
 
     private final TagService tagService;
@@ -46,7 +49,7 @@ public class TagController {
         List<Tag> tagsDB = tagService.findAll(map1);
 
         if (tagsDB.isEmpty())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         if (tagsDB.get(0).getId()== -500L)
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -66,7 +69,7 @@ public class TagController {
         Optional<Tag> tagOpt = tagService.findOne(id);
 
         if(!tagOpt.isPresent())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         if (tagOpt.get().getId() == -500L)
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -134,7 +137,7 @@ public class TagController {
         Tag tagUpdated = tagService.updateTag(id, tag);
 
         if (tagUpdated.getId() == -404L)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         if (tagUpdated.getId() == -500L)
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -158,7 +161,7 @@ public class TagController {
             Optional<Boolean> result = tagService.deleteOne(id);
 
             if (Objects.equals(result, Optional.of(false)))
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
             if (!result.isPresent())
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
