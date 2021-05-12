@@ -37,6 +37,8 @@ INSERT INTO experts_tags (id_expert, id_tag) values (8,1);
 INSERT INTO experts_tags (id_expert, id_tag) values (9,3);
 INSERT INTO experts_tags (id_expert, id_tag) values (9,5);
 
+INSERT INTO users (username, email, password) values ( 'Usuario Prueba', 'usuarioprueba@example.com', '$2a$10$oAnwNHxXfUryv.DWhxFkiOTURvHVxB8cbARZaEniLripNYBRaP482');
+
 
 
 
